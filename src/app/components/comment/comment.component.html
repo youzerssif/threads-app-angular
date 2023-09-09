@@ -1,6 +1,5 @@
-<a
-  href="#"
-  class="relative block overflow-hidden rounded-lg border border-gray-100 p-4 sm:p-6 lg:p-8"
+<article
+  class="shadow-md relative block overflow-hidden rounded-lg border border-gray-100 p-4 sm:p-6 lg:p-8"
 >
   <span
     class="absolute inset-x-0 bottom-0 h-2 bg-gradient-to-r from-green-300 via-blue-500 to-purple-600"
@@ -22,20 +21,27 @@
   </div>
 
   <dl class="mt-6 flex justify-end gap-4 sm:gap-6">
-    <a
+    <button 
+    (click)="toggleReplying()"
     class="inline-block rounded border border-current px-4 py-1 text-sm font-medium text-indigo-600 transition hover:rotate-2 hover:scale-110 focus:outline-none focus:ring active:text-indigo-500"
-    href="/download"
     >
     Reply
-    </a>
+  </button>
     <button>
         12 Likes
     </button>
-    <button>
+    <button (click)="toggleExpanded()" class="duration-200" [class.rotate-180]="IsExpanded">
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
             <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
         </svg>
           
     </button>
   </dl>
-</a>
+  <section class="my-4" *ngIf="IsReplying">
+    <app-comment-form></app-comment-form>
+  </section>
+  <section class="nested-comments" *ngIf="IsExpanded">
+    <app-comment></app-comment>
+    <app-comment></app-comment>
+  </section>
+</article>
